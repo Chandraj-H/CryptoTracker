@@ -25,6 +25,7 @@ fun CoinListScreen(
     // when calling function. This will allow preview to run properly. You can custom data to check preview
     modifier: Modifier = Modifier
 ) {
+
     if(state.isLoading){
         Box(
             modifier = modifier
