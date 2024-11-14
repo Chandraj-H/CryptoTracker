@@ -23,6 +23,7 @@ import com.plcoding.cryptotracker.ui.theme.CryptoTrackerTheme
 fun CoinListScreen(
     state: CoinListState,   //don't put data directly, instead just initialize and you can put data
     // when calling function. This will allow preview to run properly. You can custom data to check preview
+    onAction: (CoinListAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -43,7 +44,7 @@ fun CoinListScreen(
             items(state.coins){coinUi ->
                 CoinListItem(
                     coinUi = coinUi,
-                    onClick = { /*TODO*/ },
+                    onClick = { onAction(CoinListAction.OnCoinClick(coinUi)) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 HorizontalDivider()
@@ -55,16 +56,18 @@ fun CoinListScreen(
 
 @PreviewLightDark
 @Composable
-private fun CoinListScreenPreview(){
+private fun CoinListScreenPreview() {
     CryptoTrackerTheme {
         CoinListScreen(
             state = CoinListState(
-                coins = (1..100).map{
+                coins = (1..100).map {
                     previewCoin.copy(it.toString())
                 }
             ),
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.background),
+            onAction = {}
         )
     }
 }
+  
